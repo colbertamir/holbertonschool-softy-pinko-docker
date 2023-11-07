@@ -1,7 +1,13 @@
 FROM ubuntu:latest
 
-RUN apt-get update
+RUN apt-get update -y && apt-get install -y python3 python3-pip
 
-RUN apt-get upgrade -y
+RUN pip3 install Flask
 
-CMD [ "echo", "Hello, World!" ]
+WORKDIR /app
+
+COPY api.py /app/api.py
+
+EXPOSE 5252
+
+CMD [ "python3", "api.py" ]
